@@ -14,7 +14,7 @@ contract Ownable {
     event changeOwner(address newOwner);
     //  2) create an internal constructor that sets the _owner var to the creater of the contract
 
-    constructor() {
+    constructor() public {
         _owner = msg.sender;
         emit changeOwner(msg.sender);
     }
@@ -34,7 +34,7 @@ contract Ownable {
 
     }
 
-    function getOwner() public returns(address) {
+    function getOwner() public view returns(address) {
         return _owner;
     }
 }
@@ -149,7 +149,7 @@ contract ERC721 is Pausable, ERC165 {
     function balanceOf(address owner) public view returns (uint256) {
         // TODO return the token balance of given address
         // TIP: remember the functions to use for Counters. you can refresh yourself with the link above
-        return _ownedTokensCount[owner];
+        return _ownedTokensCount[owner].current();
     }
 
     function ownerOf(uint256 tokenId) public view returns (address) {
@@ -161,9 +161,9 @@ contract ERC721 is Pausable, ERC165 {
     function approve(address to, uint256 tokenId) public {
         // TODO require the given address to not be the owner of the tokenId
         address _tOwner = ownerOf(tokenId);
-        require(to != _tOwner, "The appreoved address cannot be the existing token owner.")
+        require(to != _tOwner, "The appreoved address cannot be the existing token owner.");
         // TODO require the msg sender to be the owner of the contract or isApprovedForAll() to be true
-        require(msg.sender == _tOwner || isApprovedForAll(_tOwner, msg.sender), "Approval condition not met!")
+        require(msg.sender == _tOwner || isApprovedForAll(_tOwner, msg.sender), "Approval condition not met!");
         // TODO add 'to' address to token approvals
         _tokenApprovals[tokenId] = to;
         // TODO emit Approval Event
@@ -493,15 +493,15 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 
     // TODO: create external getter functions for name, symbol, and baseTokenURI
 
-    function getTokenName() external view returns(string) {
+    function getTokenName() external view returns(string memory) {
         return _name;
     }
 
-    function getTokenSymbol() external view returns(string) {
+    function getTokenSymbol() external view returns(string memory) {
         return _symbol;
     }
 
-    function getBaseTokenURI() external view returns(string) {
+    function getBaseTokenURI() external view returns(string memory) {
         return _baseTokenURI;
     }
 
@@ -516,10 +516,10 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
     // TIP #2: you can also use uint2str() to convert a uint to a string
         // see https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol for strConcat()
     // require the token exists before setting
-    function setTokenURI(uint256 tokenId) internal returns(string) {
+    function setTokenURI(uint256 tokenId) internal {
         require(_exists(tokenId));
-        string tokenIdString = uint2str(tokenId);
-        return strConcat(_baseTokenURI, tokenIdString);
+        string memory tokenIdString = uint2str(tokenId);
+        _tokenURIs[tokenId] = strConcat(_baseTokenURI, tokenIdString);
     }
 }
 
@@ -527,18 +527,19 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 contract CustomERC721 is ERC721Metadata {
     //  1) Pass in appropriate values for the inherited ERC721Metadata contract
     //      - make the base token uri: https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/
-    _baseTokenURI = "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/";
-    _name = "TashCoin";
-    _symbol = "TCN";
-    // constructor() public {
-    //     _baseTokenURI = "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/";
-    // }
+    string _baseTokenURI = "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/";
+    string _name = "TashCoin";
+    string _symbol = "TCN";
+
+    constructor() ERC721Metadata(_name, _symbol, _baseTokenURI) public {
+    }
+
     //  2) create a public mint() that does the following:
     //      -can only be executed by the contract owner
     //      -takes in a 'to' address, tokenId, and tokenURI as parameters
     //      -returns a true boolean upon completion of the function
     //      -calls the superclass mint and setTokenURI functions
-    function mint(address to, uint256 tokenId, string tokenURI) public onlyOwner returns(bool) {
+    function mint(address to, uint256 tokenId) public onlyOwner returns(bool) {
         super._mint(to, tokenId);
         super.setTokenURI(tokenId);
         return true;
