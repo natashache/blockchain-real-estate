@@ -6,7 +6,13 @@
 
 - SolnSquareVerifier: https://rinkeby.etherscan.io/address/0x96134b7a1fbE3f4103c6086227F4fDbBAf26872a
 
-##Minted tokens
+## Contract ABIs
+
+- Verifier: `./eth-contracts/build/contracts/Verifier.json`
+
+- SolnSquareVerifier: `./eth-contracts/build/contracts/SolnSquareVerifier.json`
+
+## Minted tokens
 
 https://rinkeby.etherscan.io/token/0x96134b7a1fbe3f4103c6086227f4fdbbaf26872a
 
@@ -14,11 +20,6 @@ https://rinkeby.etherscan.io/token/0x96134b7a1fbe3f4103c6086227f4fdbbaf26872a
 
 https://testnets.opensea.io/collection/unidentified-contract-opkw9s6rlb
 
-## Contract ABIs
-
-- Verifier: `./eth-contracts/build/contracts/Verifier.json`
-
-- SolnSquareVerifier: `./eth-contracts/build/contracts/SolnSquareVerifier.json`
 
 ## Install
 
