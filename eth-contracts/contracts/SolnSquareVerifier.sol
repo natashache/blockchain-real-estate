@@ -52,7 +52,7 @@ contract SolnSquareVerifier is CustomERC721 {
       //  - make sure the solution is unique (has not been used before)
       //  - make sure you handle metadata as well as tokenSuplly
 
-      // require(verifierContract.verifyTx(a, b, c, inputs), "Wrong solution!");
+      require(verifierContract.verifyTx(a, b, c, inputs), "Wrong solution!");
       addSolution(to, tokenId, a, b, c, inputs);
       super.mint(to, tokenId);
     }
