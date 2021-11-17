@@ -1,12 +1,24 @@
 # Blockchain NFTs
 
-## Deployed links
+## Deployed Contracts
 
-- Contract: https://rinkeby.etherscan.io/address/0x96134b7a1fbE3f4103c6086227F4fDbBAf26872a
+- Verifier: https://rinkeby.etherscan.io/address/0x1b87d2e021c22D7aa869F1739fe030e6bC8997C3
 
-- Tokens: https://rinkeby.etherscan.io/token/0x96134b7a1fbe3f4103c6086227f4fdbbaf26872a
+- SolnSquareVerifier: https://rinkeby.etherscan.io/address/0x96134b7a1fbE3f4103c6086227F4fDbBAf26872a
 
-- OpenSea collection: https://testnets.opensea.io/collection/unidentified-contract-opkw9s6rlb
+##Minted tokens
+
+https://rinkeby.etherscan.io/token/0x96134b7a1fbe3f4103c6086227f4fdbbaf26872a
+
+## OpenSea collection
+
+https://testnets.opensea.io/collection/unidentified-contract-opkw9s6rlb
+
+## Contract ABIs
+
+- Verifier: `./eth-contracts/build/contracts/Verifier.json`
+
+- SolnSquareVerifier: `./eth-contracts/build/contracts/SolnSquareVerifier.json`
 
 ## Install
 
