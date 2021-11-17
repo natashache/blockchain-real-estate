@@ -1,6 +1,6 @@
 # Blockchain NFTs
 
-##Deployed links
+## Deployed links
 
 - Contract: https://rinkeby.etherscan.io/address/0x96134b7a1fbE3f4103c6086227F4fDbBAf26872a
 
@@ -8,15 +8,18 @@
 
 - OpenSea collection: https://testnets.opensea.io/collection/unidentified-contract-opkw9s6rlb
 
-##Install
+## Install
+
 `npm install`
 
-##Compile
+## Compile
+
 `cd eth-contracts`
 
 `truffle compile`
 
-##Test
+## Test
+
 `truffle test ./test/TestERC721Mintable.js`
 
 `truffle test ./test/TestSquareVerifier.js`
